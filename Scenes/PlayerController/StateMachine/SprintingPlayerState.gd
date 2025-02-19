@@ -7,6 +7,10 @@ extends PlayerMovementState
 @export var deceleration : float = 0.25
 @export var top_anim_speed : float = 1.6
 
+@export var weapon_bob_spd: float= 8.0
+@export var weapon_bob_h: float = 2.5
+@export var weapon_bob_v : float = 1.5
+
 func enter(previous_state) -> void:
 	if animation.is_playing() and animation.current_animation == "jumpend":
 		await animation.animation_finished
@@ -22,6 +26,10 @@ func update(delta):
 	player.update_gravity(delta)
 	player.update_input(speed,acceleration,deceleration)
 	player.update_velocity()
+	
+	weapon.sway_weapon(delta, false)
+	weapon._weapon_bob(delta, weapon_bob_spd, weapon_bob_h, weapon_bob_v)
+	
 	set_animation_speed(player.velocity.length())
 	
 	if Input.is_action_just_released("sprint"):

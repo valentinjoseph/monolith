@@ -6,7 +6,10 @@ var _current_rotation:float
 @export var SPEED_DEFAULT = 5.0
 @export var JUMP_VELOCITY = 4.5
 
-
+#weapons
+@export var weapon_controller: WeaponController
+	
+	
 #crouching variables
 var _is_crouching : bool = false
 @onready var AnimPlayer: AnimationPlayer = $AnimationPlayer

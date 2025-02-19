@@ -7,6 +7,10 @@ extends PlayerMovementState
 @export var deceleration : float = 0.25
 @export_range(1, 6, 0.1) var crouch_speed : float = 4.0
 
+@export var weapon_bob_spd: float= 2.0
+@export var weapon_bob_h: float = 1.5
+@export var weapon_bob_v : float = 0.7
+
 @onready var crouch_shapecast : ShapeCast3D = %CrouchShapeCast
 
 var released : bool = false
@@ -26,6 +30,9 @@ func update(delta):
 	player.update_gravity(delta)
 	player.update_input(speed,acceleration,deceleration)
 	player.update_velocity()
+	
+	weapon.sway_weapon(delta, false)
+	weapon._weapon_bob(delta, weapon_bob_spd, weapon_bob_h, weapon_bob_v)
 	
 	if Input.is_action_just_released("crouch"):
 		uncrouch()

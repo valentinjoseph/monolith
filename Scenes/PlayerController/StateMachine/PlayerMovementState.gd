@@ -4,10 +4,13 @@ extends State
 
 var player: Player
 var animation : AnimationPlayer
+var weapon: WeaponController
 
 func _ready():
 	await owner.ready	
 	player = owner as Player
 	animation = player.AnimPlayer
+	weapon = player.weapon_controller	
+	
 func _process(delta):
 	pass
