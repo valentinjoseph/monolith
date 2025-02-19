@@ -1,0 +1,22 @@
+[gd_scene load_steps=7 format=3 uid="uid://ck7sv38i12fj5"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/scripts/init_weapon.gd" id="1_tetmw"]
+[ext_resource type="Resource" uid="uid://c31xupimr22r7" path="res://Models/weapons/crowbar/CrowbarResource.tres" id="2_idro7"]
+[ext_resource type="ArrayMesh" uid="uid://c2ymled7n3av" path="res://Models/weapons/crowbar/crowbarmesh.res" id="4_bnuf8"]
+
+[sub_resource type="Gradient" id="Gradient_dyjlb"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_insqt"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3jwgr"]
+color_ramp = SubResource("Gradient_dyjlb")
+noise = SubResource("FastNoiseLite_insqt")
+
+[node name="Weapon" type="Node3D"]
+script = ExtResource("1_tetmw")
+weapon_type = ExtResource("2_idro7")
+sway_noise = SubResource("NoiseTexture2D_3jwgr")
+
+[node name="WeaponMesh" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+mesh = ExtResource("4_bnuf8")
