@@ -31,6 +31,9 @@ func update(delta):
 	if Input.is_action_just_released("jump"):
 		if player.velocity.y > 0:
 			player.velocity.y = player.velocity.y / 2.0
+			
+	if player.velocity.y < -3.0 and !player.is_on_floor():
+		transition.emit("FallingPlayerState")
 		
 	if player.is_on_floor():
 		animation.play("jumpend")
