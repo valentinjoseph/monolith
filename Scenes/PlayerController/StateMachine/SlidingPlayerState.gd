@@ -21,6 +21,9 @@ func update(delta):
 	#player.update_input(speed,acceleration,deceleration) #disable to maintain direction while sliding
 	player.update_velocity()
 	
+	if Input.is_action_just_pressed("attack"):
+		weapon._attack()
+	
 func set_tilt(player_rotation) ->void:
 	var tilt=Vector3.ZERO
 	tilt.z= clamp(tilt_amount * player_rotation, -0.1, 0.1)

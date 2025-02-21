@@ -33,6 +33,9 @@ func update(delta):
 	if Input.is_action_just_pressed("jump") and double_jump==false:
 		double_jump=true
 		player.velocity.y=double_jump_velocity
+	
+	if Input.is_action_just_pressed("attack"):
+		weapon._attack()
 		
 	if Input.is_action_just_released("jump"):
 		if player.velocity.y > 0:

@@ -39,6 +39,9 @@ func update(delta):
 	elif Input.is_action_pressed("crouch")==false and released==false:
 		released = true
 		uncrouch()
+	
+	if Input.is_action_just_pressed("attack"):
+		weapon._attack()
 		
 func uncrouch():
 	if crouch_shapecast.is_colliding()==false and Input.is_action_pressed("crouch")==false:

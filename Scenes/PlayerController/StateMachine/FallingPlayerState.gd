@@ -31,6 +31,9 @@ func update(delta):
 		double_jump=true
 		player.velocity.y=double_jump_velocity
 	
+	if Input.is_action_just_pressed("attack"):
+		weapon._attack()
+	
 	if player.is_on_floor():
 		animation.play("jumpend")
 		transition.emit("IdlePlayerState")

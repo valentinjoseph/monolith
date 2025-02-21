@@ -2,6 +2,9 @@
 class_name WeaponController
 extends Node3D
 
+signal weapon_fired
+
+
 @export var weapon_type: Weapons:
 	set(value):
 		weapon_type = value
@@ -28,6 +31,8 @@ var idle_sway_adjustment
 var idle_sway_rotation_strength
 var weapon_bob_amount : Vector2 = Vector2(0,0)
 
+var raycast_test = preload("res://Assets/shooting/raycast_test.tscn")
+var shoot_toggle:bool=false
 
 func _ready()->void:
 	await owner.ready
@@ -36,10 +41,12 @@ func _ready()->void:
 func _input(event):
 	if event.is_action_pressed("weapon1"):
 		weapon_type=load("res://Models/weapons/crowbar/CrowbarResource.tres")
+		shoot_toggle=false
 		load_weapon()
-	#if event.is_action_pressed("weapon2"):
-		#weapon_type=load("res://Models/weapons/crowbar2/Crowbar2Resource.tres")
-		#load_weapon()
+	if event.is_action_pressed("weapon2"):
+		weapon_type=load("res://Models/weapons/handgun/HandgunResource.tres")
+		shoot_toggle=true
+		load_weapon()
 		
 	if event is InputEventMouseMotion:
 		mouse_movement=event.relative	
@@ -100,3 +107,34 @@ func get_sway_noise()->float:
 		
 	var noise_location: float = sway_noise.noise.get_noise_2d(player_position.x, player_position.y)
 	return noise_location
+
+
+func _attack() -> void:
+	var camera = Global.player.camera_controller
+	var space_state = camera.get_world_3d().direct_space_state
+	var screen_center = get_viewport().size / 2
+	var origin = camera.project_ray_origin(screen_center)
+	var end = origin + camera.project_ray_normal(screen_center) * 1000
+	var query = PhysicsRayQueryParameters3D.create(origin,end)
+	query.collide_with_bodies = true
+	var result = space_state.intersect_ray(query)
+	#print(screen_center)
+	if result and shoot_toggle==true:
+		weapon_fired.emit()
+		_bullet_hole(result.get("position"), result.get("normal"))
+	if shoot_toggle==false:
+		pass
+		
+func _bullet_hole(position: Vector3, normal : Vector3)-> void:
+	var instance = raycast_test.instantiate()
+	get_tree().root.add_child(instance)
+	instance.global_position = position
+	instance.look_at(instance.global_transform.origin + normal, Vector3.UP )
+	if normal != Vector3.UP and normal != Vector3.DOWN:
+		instance.rotate_object_local(Vector3(1,0,0), 90)
+	
+	await get_tree().create_timer(2).timeout
+	var fade = get_tree().create_tween()
+	fade.tween_property(instance, "modulate:a", 0, 1.5)
+	await get_tree().create_timer(1.5).timeout
+	instance.queue_free()

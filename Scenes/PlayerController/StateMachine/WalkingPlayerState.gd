@@ -39,11 +39,16 @@ func update(delta):
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
 		transition.emit("JumpingPlayerState")
 		
+	if Input.is_action_just_pressed("attack"):
+		weapon._attack()
+		
 	if player.velocity.length() == 0.0:
 		transition.emit("IdlePlayerState")
 		
 	if player.velocity.y < -3.0 and !player.is_on_floor():
 		transition.emit("FallingPlayerState")
+		
+	
 		
 func set_animation_speed(spd):
 	var alpha = remap (spd, 0.0, speed, 0.0, 1.0)

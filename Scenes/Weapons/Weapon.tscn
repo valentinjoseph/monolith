@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ck7sv38i12fj5"]
+[gd_scene load_steps=8 format=3 uid="uid://ck7sv38i12fj5"]
 
 [ext_resource type="Script" path="res://Scenes/Weapons/scripts/init_weapon.gd" id="1_tetmw"]
-[ext_resource type="Resource" uid="uid://c31xupimr22r7" path="res://Models/weapons/crowbar/CrowbarResource.tres" id="2_idro7"]
-[ext_resource type="ArrayMesh" uid="uid://c2ymled7n3av" path="res://Models/weapons/crowbar/crowbarmesh.res" id="4_bnuf8"]
+[ext_resource type="Resource" uid="uid://c31xupimr22r7" path="res://Models/weapons/crowbar/CrowbarResource.tres" id="2_mtxm2"]
+[ext_resource type="Script" path="res://Scenes/Weapons/scripts/weapon_recoil_physical.gd" id="3_0aaqx"]
+[ext_resource type="ArrayMesh" uid="uid://c2ymled7n3av" path="res://Models/weapons/crowbar/crowbarmesh.res" id="3_uy6ms"]
 
 [sub_resource type="Gradient" id="Gradient_dyjlb"]
 
@@ -13,10 +14,21 @@ color_ramp = SubResource("Gradient_dyjlb")
 noise = SubResource("FastNoiseLite_insqt")
 
 [node name="Weapon" type="Node3D"]
+transform = Transform3D(-0.992541, 0.12189, 0.0024289, 0.00451701, 0.0168577, 0.999848, 0.12183, 0.992401, -0.0172825, 0.13, -0.165, -0.22)
 script = ExtResource("1_tetmw")
-weapon_type = ExtResource("2_idro7")
+weapon_type = ExtResource("2_mtxm2")
 sway_noise = SubResource("NoiseTexture2D_3jwgr")
 
-[node name="WeaponMesh" type="MeshInstance3D" parent="."]
+[node name="RecoilPosition" type="Node3D" parent="." node_paths=PackedStringArray("weapon")]
+transform = Transform3D(1, 0, 2.32831e-10, -7.45058e-09, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0)
+script = ExtResource("3_0aaqx")
+recoil_amount = Vector3(20, 20, 20)
+snap_amount = 20.0
+speed = 20.0
+weapon = NodePath("..")
+
+[node name="WeaponMesh" type="MeshInstance3D" parent="RecoilPosition"]
 unique_name_in_owner = true
-mesh = ExtResource("4_bnuf8")
+transform = Transform3D(1, 0, 2.32831e-10, 0, 1, 0, -4.65661e-10, 0, 1, 0, 0, 0)
+mesh = ExtResource("3_uy6ms")
+skeleton = NodePath("../..")

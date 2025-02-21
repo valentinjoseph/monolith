@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=3 format=3 uid="uid://d2gj07h8hvid8"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/scripts/weapons.gd" id="1_bvw0j"]
+[ext_resource type="ArrayMesh" uid="uid://dwdy424vj2j1x" path="res://Models/weapons/handgun/handgunmesh.res" id="1_hu4xf"]
+
+[resource]
+script = ExtResource("1_bvw0j")
+name = &"Handgun"
+position = Vector3(0.564, -0.746, -0.786)
+rotation = Vector3(-87.3, 0, -180)
+scale = Vector3(0.001, 0.001, 0.001)
+sway_min = Vector2(-20, -20)
+sway_max = Vector2(20, 20)
+sway_speed_position = 0.07
+sway_speed_rotation = 0.1
+sway_amount_position = 0.1
+sway_amount_rotation = 30.0
+idle_sway_adjustment = 10.0
+idle_sway_rotation_strength = 300.0
+random_sway_amount = 5.0
+mesh = ExtResource("1_hu4xf")
+shadow = false
+damage_amount = 0.0

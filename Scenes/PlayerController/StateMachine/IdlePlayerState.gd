@@ -21,6 +21,7 @@ func update(delta):
 	
 	weapon.sway_weapon(delta, true)
 	
+	
 	if Input.is_action_just_pressed("crouch") and player.is_on_floor():
 		transition.emit("CrouchingPlayerState")
 		
@@ -32,3 +33,6 @@ func update(delta):
 
 	if player.velocity.y < -3.0 and !player.is_on_floor():
 		transition.emit("FallingPlayerState")
+
+	if Input.is_action_just_pressed("attack"):
+		weapon._attack()

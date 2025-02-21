@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://sb8ljfw7ljuj"]
+[gd_scene load_steps=27 format=3 uid="uid://sb8ljfw7ljuj"]
 
 [ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerController.gd" id="1_p0mwa"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerReticle.gd" id="2_ngm4u"]
+[ext_resource type="Script" path="res://Scenes/Weapons/scripts/weapon_recoil.gd" id="2_ycr0k"]
 [ext_resource type="Theme" uid="uid://5iuesaepmq84" path="res://UI/Themes/debug.tres" id="3_lpptg"]
 [ext_resource type="PackedScene" uid="uid://ck7sv38i12fj5" path="res://Scenes/Weapons/Weapon.tscn" id="3_wh8nb"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerDebug.gd" id="4_mevor"]
@@ -95,7 +96,7 @@ tracks/5/keys = {
 tracks/6/type = "bezier"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("CameraController/Camera3D:position:x")
+tracks/6/path = NodePath("CameraController/Recoil/Camera3D:position:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -106,7 +107,7 @@ tracks/6/keys = {
 tracks/7/type = "bezier"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("CameraController/Camera3D:position:y")
+tracks/7/path = NodePath("CameraController/Recoil/Camera3D:position:y")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -117,7 +118,7 @@ tracks/7/keys = {
 tracks/8/type = "bezier"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("CameraController/Camera3D:position:z")
+tracks/8/path = NodePath("CameraController/Recoil/Camera3D:position:z")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -164,7 +165,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("CameraController/Camera3D:fov")
+tracks/12/path = NodePath("CameraController/Recoil/Camera3D:fov")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -358,7 +359,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("CameraController/Camera3D:fov")
+tracks/7/path = NodePath("CameraController/Recoil/Camera3D:fov")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -375,7 +376,7 @@ loop_mode = 1
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CameraController/Camera3D:position:x")
+tracks/0/path = NodePath("CameraController/Recoil/Camera3D:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -386,7 +387,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CameraController/Camera3D:position:y")
+tracks/1/path = NodePath("CameraController/Recoil/Camera3D:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -397,7 +398,7 @@ tracks/1/keys = {
 tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CameraController/Camera3D:position:z")
+tracks/2/path = NodePath("CameraController/Recoil/Camera3D:position:z")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -459,9 +460,9 @@ _data = {
 
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("weapon_controller", "crouch_shapecast", "camera_controller")]
 script = ExtResource("1_p0mwa")
-weapon_controller = NodePath("CameraController/Camera3D/WeaponRig/Weapon")
+weapon_controller = NodePath("CameraController/Recoil/Camera3D/WeaponRig/Weapon")
 crouch_shapecast = NodePath("CrouchShapeCast")
-camera_controller = NodePath("CameraController/Camera3D")
+camera_controller = NodePath("CameraController/Recoil/Camera3D")
 
 [node name="PlayerCollide" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -475,17 +476,19 @@ surface_material_override/0 = SubResource("StandardMaterial3D_6cse8")
 [node name="CameraController" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraController"]
+[node name="Recoil" type="Node3D" parent="CameraController" node_paths=PackedStringArray("weapon")]
+script = ExtResource("2_ycr0k")
+recoil_amount = Vector3(0.15, 0.05, 0)
+snap_amount = 8.0
+speed = 4.0
+weapon = NodePath("Camera3D/WeaponRig/Weapon")
 
-[node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/Camera3D"]
-visible = false
-update_mode = 1
+[node name="Camera3D" type="Camera3D" parent="CameraController/Recoil"]
 
-[node name="WeaponRig" type="Node3D" parent="CameraController/Camera3D"]
+[node name="WeaponRig" type="Node3D" parent="CameraController/Recoil/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00614738, 0)
 
-[node name="Weapon" parent="CameraController/Camera3D/WeaponRig" instance=ExtResource("3_wh8nb")]
-transform = Transform3D(-0.992541, 0.12189, 0.0024289, 0.00451701, 0.0168577, 0.999848, 0.12183, 0.992401, -0.0172825, 0.13, -0.165, -0.22)
+[node name="Weapon" parent="CameraController/Recoil/Camera3D/WeaponRig" instance=ExtResource("3_wh8nb")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -516,10 +519,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_right = 40.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
