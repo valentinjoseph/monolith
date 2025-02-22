@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://4ro1qmi62qew"]
+
+[ext_resource type="Script" path="res://Assets/WalkingSounds/footsteps.gd" id="1_5wvd1"]
+[ext_resource type="AudioStream" uid="uid://ctwipc3rn3oth" path="res://Assets/WalkingSounds/footstep04.ogg" id="2_3cmeh"]
+[ext_resource type="AudioStream" uid="uid://b5c8324gid1ey" path="res://Assets/WalkingSounds/footstep06.ogg" id="3_inwe7"]
+
+[node name="footstep" type="AudioStreamPlayer3D"]
+volume_db = -5.423
+doppler_tracking = 1
+script = ExtResource("1_5wvd1")
+footstep_sounds = Array[AudioStream]([ExtResource("2_3cmeh"), ExtResource("3_inwe7")])

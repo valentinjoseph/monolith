@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ck7sv38i12fj5"]
+[gd_scene load_steps=14 format=3 uid="uid://ck7sv38i12fj5"]
 
 [ext_resource type="Script" path="res://Scenes/Weapons/scripts/init_weapon.gd" id="1_tetmw"]
 [ext_resource type="Resource" uid="uid://c31xupimr22r7" path="res://Models/weapons/crowbar/CrowbarResource.tres" id="2_mtxm2"]
 [ext_resource type="Script" path="res://Scenes/Weapons/scripts/weapon_recoil_physical.gd" id="3_0aaqx"]
 [ext_resource type="ArrayMesh" uid="uid://c2ymled7n3av" path="res://Models/weapons/crowbar/crowbarmesh.res" id="3_uy6ms"]
+[ext_resource type="Script" path="res://Scenes/Weapons/scripts/muzzle_flash.gd" id="5_dcp6k"]
 
 [sub_resource type="Gradient" id="Gradient_dyjlb"]
 
@@ -12,6 +13,41 @@
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3jwgr"]
 color_ramp = SubResource("Gradient_dyjlb")
 noise = SubResource("FastNoiseLite_insqt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c7654"]
+angle_min = -80.0
+angle_max = 80.0
+direction = Vector3(-1, 0, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 2.0
+gravity = Vector3(0, 2, 0)
+
+[sub_resource type="Gradient" id="Gradient_n3iae"]
+offsets = PackedFloat32Array(0, 0.00488998, 0.0122249, 0.997555, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.640587, 0.640587, 0.640587, 1, 0.749422, 0.662781, 0.520156, 0.660098, 0.960784, 0.705882, 0.286275, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8d4sy"]
+gradient = SubResource("Gradient_n3iae")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8mkib"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(0.960784, 0.705882, 0.286275, 1)
+albedo_texture = SubResource("GradientTexture2D_8d4sy")
+roughness = 0.0
+emission_enabled = true
+emission_energy_multiplier = 16.0
+emission_texture = SubResource("GradientTexture2D_8d4sy")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_s5wrt"]
+material = SubResource("StandardMaterial3D_8mkib")
+size = Vector2(0.2, 0.2)
 
 [node name="Weapon" type="Node3D"]
 transform = Transform3D(-0.992541, 0.12189, 0.0024289, 0.00451701, 0.0168577, 0.999848, 0.12183, 0.992401, -0.0172825, 0.13, -0.165, -0.22)
@@ -32,3 +68,24 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 2.32831e-10, 0, 1, 0, -4.65661e-10, 0, 1, 0, 0, 0)
 mesh = ExtResource("3_uy6ms")
 skeleton = NodePath("../..")
+
+[node name="MuzzleFlash" type="Node3D" parent="." node_paths=PackedStringArray("weapon", "light", "emitter")]
+transform = Transform3D(1, -7.45056e-09, 4.65661e-10, 0, 1, 1.11759e-08, -2.32831e-10, -1.11759e-08, 1, -0.0426025, -422.148, 488.687)
+script = ExtResource("5_dcp6k")
+weapon = NodePath("..")
+light = NodePath("OmniLight3D")
+emitter = NodePath("GPUParticles3D")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MuzzleFlash"]
+visible = false
+light_color = Color(0.961461, 0.704973, 0.287568, 1)
+light_energy = 4.0
+omni_range = 6.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="MuzzleFlash"]
+emitting = false
+lifetime = 0.05
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_c7654")
+draw_pass_1 = SubResource("QuadMesh_s5wrt")

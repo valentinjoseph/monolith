@@ -3,6 +3,8 @@ class_name WeaponController
 extends Node3D
 
 signal weapon_fired
+@onready var handgun_load: AudioStreamPlayer3D = $"../../../../../Sounds/HandgunLoad"
+@onready var handgun_shoot: AudioStreamPlayer3D = $"../../../../../Sounds/HandgunShoot"
 
 
 @export var weapon_type: Weapons:
@@ -45,6 +47,7 @@ func _input(event):
 		load_weapon()
 	if event.is_action_pressed("weapon2"):
 		weapon_type=load("res://Models/weapons/handgun/HandgunResource.tres")
+		handgun_load.play()
 		shoot_toggle=true
 		load_weapon()
 		
@@ -121,6 +124,7 @@ func _attack() -> void:
 	#print(screen_center)
 	if result and shoot_toggle==true:
 		weapon_fired.emit()
+		handgun_shoot.play()
 		_bullet_hole(result.get("position"), result.get("normal"))
 	if shoot_toggle==false:
 		pass
@@ -132,6 +136,7 @@ func _bullet_hole(position: Vector3, normal : Vector3)-> void:
 	instance.look_at(instance.global_transform.origin + normal, Vector3.UP )
 	if normal != Vector3.UP and normal != Vector3.DOWN:
 		instance.rotate_object_local(Vector3(1,0,0), 90)
+		
 	
 	await get_tree().create_timer(2).timeout
 	var fade = get_tree().create_tween()

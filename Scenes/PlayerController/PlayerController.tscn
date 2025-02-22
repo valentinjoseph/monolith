@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://sb8ljfw7ljuj"]
+[gd_scene load_steps=32 format=3 uid="uid://sb8ljfw7ljuj"]
 
 [ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerController.gd" id="1_p0mwa"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerReticle.gd" id="2_ngm4u"]
@@ -9,11 +9,16 @@
 [ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerStateMachine.gd" id="5_w4fw7"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/IdlePlayerState.gd" id="6_k1wog"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/WalkingPlayerState.gd" id="7_63l7o"]
+[ext_resource type="PackedScene" uid="uid://bhqqq7b74phjf" path="res://Scenes/Menus/pause_menu.tscn" id="7_r50lb"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/SprintingPlayerState.gd" id="8_gmhfp"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/CrouchingPlayerState.gd" id="9_mvqn6"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/SlidingPlayerState.gd" id="10_u64vi"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/JumpingPlayerState.gd" id="11_8lg56"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/FallingPlayerState.gd" id="12_hkira"]
+[ext_resource type="AudioStream" uid="uid://b41e7d8c6iv70" path="res://Assets/SlidingSounds/ClothSlide.wav" id="16_cnonj"]
+[ext_resource type="AudioStream" uid="uid://gaxxc2scknsg" path="res://Assets/shooting/HandgunLoad.wav" id="17_2oflj"]
+[ext_resource type="AudioStream" uid="uid://cch1ibjkox1ob" path="res://Assets/shooting/HandgunShoot.wav" id="18_r02ht"]
+[ext_resource type="PackedScene" uid="uid://4ro1qmi62qew" path="res://Assets/WalkingSounds/footstep.tscn" id="19_rc5ap"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hcf0t"]
 
@@ -562,6 +567,14 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="PauseMenu" parent="UserInterface" instance=ExtResource("7_r50lb")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("5_w4fw7")
 current_state = NodePath("IdlePlayerState")
@@ -586,5 +599,22 @@ script = ExtResource("11_8lg56")
 
 [node name="FallingPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("12_hkira")
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="footstep" parent="Sounds" instance=ExtResource("19_rc5ap")]
+bus = &"WalkFootsteps"
+
+[node name="Sliding" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("16_cnonj")
+bus = &"Sliding"
+
+[node name="HandgunLoad" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("17_2oflj")
+bus = &"Handgun"
+
+[node name="HandgunShoot" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("18_r02ht")
+bus = &"Handgun"
 
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
