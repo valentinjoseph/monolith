@@ -5,6 +5,7 @@ extends ColorRect
 @onready var resume_button: Button= $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Resume
 @onready var control_button: Button = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Controls
 @onready var quit_button: Button = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Quit
+@onready var context_component: ContextComponent = $"../ContextComponent"
 
 
 func _ready() -> void:
@@ -15,20 +16,22 @@ func _ready() -> void:
 func _process(delta):
 
 	if Input.is_action_just_pressed("exit") and window.visible==true:
+		window.visible=false
+		context_component.visible=true
 		unpause()
 		
 	elif Input.is_action_just_pressed("exit") and window.visible==false:
+		window.visible=true
+		context_component.visible=false
 		pause()
 			
 func unpause():
 	animator.play("Unpause")
 	get_tree().paused=false
-	window.visible=false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 func pause():
 	animator.play("Pause")
 	get_tree().paused=true
-	window.visible=true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	

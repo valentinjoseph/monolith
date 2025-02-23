@@ -2,6 +2,9 @@ class_name InteractionComponent
 extends Node
 
 @export var mesh: MeshInstance3D
+@export var context: String
+@export var override_icon: bool
+@export var new_icon : Texture2D
 
 var parent
 var highlight_material = preload("res://Assets/InteractMaterial/Interactable_Highlight.tres")
@@ -16,12 +19,17 @@ func _process(delta: float) -> void:
 	
 func in_range() -> void:
 	mesh.material_overlay = highlight_material
+	Global.ui_context.update_content(context)
+	Global.ui_context.update_icon(new_icon, override_icon)
+	
 	
 func not_in_range() -> void:
 	mesh.material_overlay = null
+	Global.ui_context.reset()
 	
 func on_interact()-> void:
-	print(parent.name)
+	#print(parent.name)
+	pass
 	
 func connect_parent() -> void:
 	parent.add_user_signal("focused")

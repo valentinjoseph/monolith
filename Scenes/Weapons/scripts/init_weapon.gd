@@ -35,20 +35,26 @@ var weapon_bob_amount : Vector2 = Vector2(0,0)
 
 var raycast_test = preload("res://Assets/shooting/raycast_test.tscn")
 var shoot_toggle:bool=false
+var weapon1_toggle:bool=false
+var weapon2_toggle:bool=true
 
 func _ready()->void:
 	await owner.ready
 	load_weapon()
 
 func _input(event):
-	if event.is_action_pressed("weapon1"):
+	if event.is_action_pressed("weapon1") and weapon1_toggle==true:
 		weapon_type=load("res://Models/weapons/crowbar/CrowbarResource.tres")
 		shoot_toggle=false
+		weapon2_toggle=true
+		weapon1_toggle=false
 		load_weapon()
-	if event.is_action_pressed("weapon2"):
+	if event.is_action_pressed("weapon2") and weapon2_toggle==true:
 		weapon_type=load("res://Models/weapons/handgun/HandgunResource.tres")
 		handgun_load.play()
 		shoot_toggle=true
+		weapon2_toggle=false
+		weapon1_toggle=true
 		load_weapon()
 		
 	if event is InputEventMouseMotion:

@@ -2,4 +2,5 @@ extends Node
 
 
 var debug #references the DebugPanel
-var player #references to the player 
+var player: Player #references to the player 
+var ui_context : ContextComponent #reference to Interaction UI

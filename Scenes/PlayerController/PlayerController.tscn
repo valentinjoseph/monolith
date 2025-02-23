@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://sb8ljfw7ljuj"]
+[gd_scene load_steps=34 format=3 uid="uid://sb8ljfw7ljuj"]
 
 [ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerController.gd" id="1_p0mwa"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerReticle.gd" id="2_ngm4u"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/WalkingPlayerState.gd" id="7_63l7o"]
 [ext_resource type="PackedScene" uid="uid://bhqqq7b74phjf" path="res://Scenes/Menus/pause_menu.tscn" id="7_r50lb"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/SprintingPlayerState.gd" id="8_gmhfp"]
+[ext_resource type="Script" path="res://Assets/InteractMaterial/context_component.gd" id="8_hgcel"]
+[ext_resource type="Texture2D" uid="uid://c64vjnybj08eu" path="res://Assets/InteractMaterial/keyboard_e.png" id="9_ljdc6"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/CrouchingPlayerState.gd" id="9_mvqn6"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/SlidingPlayerState.gd" id="10_u64vi"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/JumpingPlayerState.gd" id="11_8lg56"]
@@ -574,6 +576,30 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+
+[node name="ContextComponent" type="CenterContainer" parent="UserInterface" node_paths=PackedStringArray("icon", "context")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 90.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_hgcel")
+icon = NodePath("HBoxContainer/TextureRect")
+context = NodePath("HBoxContainer/Label")
+default_icon = ExtResource("9_ljdc6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/ContextComponent"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UserInterface/ContextComponent/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UserInterface/ContextComponent/HBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
 
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
 script = ExtResource("5_w4fw7")

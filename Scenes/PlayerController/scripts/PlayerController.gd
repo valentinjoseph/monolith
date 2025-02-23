@@ -115,12 +115,15 @@ func interact_cast()->void:
 	if current_cast_result != interact_cast_result:
 		if interact_cast_result and interact_cast_result.has_user_signal("unfocused"):
 			interact_cast_result.emit_signal("unfocused")
+			#print("unfocused")
 		interact_cast_result = current_cast_result
 		if interact_cast_result and interact_cast_result.has_user_signal("focused"):
 			interact_cast_result.emit_signal("focused")
+			#print("focused")
 	
 func interact() ->void:
-	if interact_cast_result and interact_cast_result.has_user_signal("interact"):
+	if interact_cast_result and interact_cast_result.has_user_signal("interacted"):
 		interact_cast_result.emit_signal("interacted")
+		#print("interacted")
 	
 	
