@@ -632,8 +632,7 @@ shape = SubResource("ConcavePolygonShape3D_aajcp")
 
 [node name="InteractionComponent" type="Node" parent="InteractableObjects/PickBox"]
 script = ExtResource("5_b0leo")
-context = null
-override_icon = null
+context = "pick up"
 
 [node name="PickBox2" type="StaticBody3D" parent="InteractableObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.593928, 1.73649)
@@ -647,8 +646,7 @@ shape = SubResource("ConcavePolygonShape3D_aajcp")
 
 [node name="InteractionComponent" type="Node" parent="InteractableObjects/PickBox2"]
 script = ExtResource("5_b0leo")
-context = null
-override_icon = null
+context = "pick up"
 
 [node name="PickBox3" type="StaticBody3D" parent="InteractableObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.593928, -1.73664)
@@ -662,8 +660,7 @@ shape = SubResource("ConcavePolygonShape3D_aajcp")
 
 [node name="InteractionComponent" type="Node" parent="InteractableObjects/PickBox3"]
 script = ExtResource("5_b0leo")
-context = null
-override_icon = null
+context = "pick up"
 
 [node name="PickSphere" type="StaticBody3D" parent="InteractableObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.593928, -3.24962)
@@ -677,8 +674,7 @@ shape = SubResource("ConcavePolygonShape3D_pk7jt")
 
 [node name="InteractionComponent" type="Node" parent="InteractableObjects/PickSphere"]
 script = ExtResource("5_b0leo")
-context = null
-override_icon = null
+context = "pick up"
 
 [node name="DoorWall" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.983, 1.55315, -4.11945)
@@ -692,23 +688,26 @@ operation = 2
 size = Vector3(1.3, 2.2, 1)
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="DoorWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.655791, -0.391917, 0)
 
 [node name="Door" type="MeshInstance3D" parent="DoorWall/AnimatableBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00366974, -0.406179, -4.29153e-05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65716, 0, 0)
 mesh = SubResource("BoxMesh_8i0qc")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_lritu")
 
 [node name="DoorCollide" type="CollisionShape3D" parent="DoorWall/AnimatableBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00366974, -0.406179, -4.29153e-05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65716, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_eha83")
 
 [node name="DoorComponent" type="Node" parent="DoorWall/AnimatableBody3D"]
 script = ExtResource("6_lb5hw")
-direction = Vector3(0, 1, 0)
+door_type = 1
 door_size = Vector3(1.3, 2.2, 0.1)
+forward_direction = 2
+movement_direction = Vector3(0, 1, 0)
+easing = 2
 
 [node name="InteractionComponent" type="Node" parent="DoorWall/AnimatableBody3D"]
 script = ExtResource("5_b0leo")
-context = null
-override_icon = null
+context = "open door"

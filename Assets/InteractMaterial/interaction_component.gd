@@ -19,13 +19,15 @@ func _process(delta: float) -> void:
 	
 func in_range() -> void:
 	mesh.material_overlay = highlight_material
-	Global.ui_context.update_content(context)
-	Global.ui_context.update_icon(new_icon, override_icon)
+	MessageBus.interaction_focused.emit(context, new_icon, override_icon)
+	#Global.ui_context.update_content(context)
+	#Global.ui_context.update_icon(new_icon, override_icon)
 	
 	
 func not_in_range() -> void:
 	mesh.material_overlay = null
-	Global.ui_context.reset()
+	MessageBus.interaction_unfocused.emit()
+	#Global.ui_context.reset()
 	
 func on_interact()-> void:
 	#print(parent.name)

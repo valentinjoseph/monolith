@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://sb8ljfw7ljuj"]
+[gd_scene load_steps=35 format=3 uid="uid://sb8ljfw7ljuj"]
 
 [ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerController.gd" id="1_p0mwa"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerReticle.gd" id="2_ngm4u"]
@@ -465,6 +465,9 @@ _data = {
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ejk6p"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_ovn3p"]
+font_size = 30
+
 [node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("weapon_controller", "crouch_shapecast", "camera_controller")]
 script = ExtResource("1_p0mwa")
 weapon_controller = NodePath("CameraController/Recoil/Camera3D/WeaponRig/Weapon")
@@ -496,6 +499,7 @@ weapon = NodePath("Camera3D/WeaponRig/Weapon")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00614738, 0)
 
 [node name="Weapon" parent="CameraController/Recoil/Camera3D/WeaponRig" instance=ExtResource("3_wh8nb")]
+transform = Transform3D(-0.992541, 0.12189, 0.0024289, 0.00451701, 0.0168577, 0.999848, 0.12183, 0.992401, -0.0172825, 0.13, -0.165, -0.22)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -599,6 +603,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="UserInterface/ContextComponent/HBoxContainer"]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_ovn3p")
 horizontal_alignment = 1
 
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
