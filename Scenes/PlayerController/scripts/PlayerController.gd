@@ -28,9 +28,9 @@ var _camera_rotation : Vector3
 @export var tilt_upper_limit := deg_to_rad(90.0)
 @export var camera_controller : Camera3D
 
-#interaction 
-@export var interact_distance: float =2
-var interact_cast_result
+##interaction 
+#@export var interact_distance: float =2
+#var interact_cast_result
 
 #get the gravity from the project settings to be synced with RigidBody nodes
 var gravity = 12.0 #ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -42,12 +42,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		_rotation_input = -event.relative.x * mouse_sensitivity
 		_tilt_input = -event.relative.y * mouse_sensitivity
 
-func _input(event):
-	#if event.is_action_pressed("exit"):
-		#get_tree().quit()
-	if event.is_action_pressed("interact"):
-		interact()
-	
+#func _input(event):
+	##if event.is_action_pressed("exit"):
+		##get_tree().quit()
+	##if event.is_action_pressed("interact"):
+		##interact()
+	#pass
 			
 func _update_camera(delta):
 	_current_rotation = _rotation_input
@@ -83,7 +83,7 @@ func _physics_process(delta: float) -> void:
 	#Global.debug.add_property("MovementSpeed", _speed, 2)
 	
 	_update_camera(delta)
-	interact_cast()
+	#interact_cast()
 
 func update_gravity(delta)->void:
 	velocity.y -= gravity * delta
@@ -101,29 +101,29 @@ func update_input(speed:float,acceleration:float,deceleration:float)->void:
 	
 func update_velocity() -> void:
 	move_and_slide()
-
-func interact_cast()->void:
-	var camera = Global.player.camera_controller
-	var space_state = camera.get_world_3d().direct_space_state
-	var screen_center = get_viewport().size /2
-	var origin=camera.project_ray_origin(screen_center)
-	var end=origin+camera.project_ray_normal(screen_center) * interact_distance
-	var query = PhysicsRayQueryParameters3D.create(origin,end)
-	query.collide_with_bodies = true
-	var result = space_state.intersect_ray(query)
-	var current_cast_result = result.get("collider")
-	if current_cast_result != interact_cast_result:
-		if interact_cast_result and interact_cast_result.has_user_signal("unfocused"):
-			interact_cast_result.emit_signal("unfocused")
-			#print("unfocused")
-		interact_cast_result = current_cast_result
-		if interact_cast_result and interact_cast_result.has_user_signal("focused"):
-			interact_cast_result.emit_signal("focused")
-			#print("focused")
-	
-func interact() ->void:
-	if interact_cast_result and interact_cast_result.has_user_signal("interacted"):
-		interact_cast_result.emit_signal("interacted")
-		#print("interacted")
-	
-	
+#
+#func interact_cast()->void:
+	#var camera = Global.player.camera_controller
+	#var space_state = camera.get_world_3d().direct_space_state
+	#var screen_center = get_viewport().size /2
+	#var origin=camera.project_ray_origin(screen_center)
+	#var end=origin+camera.project_ray_normal(screen_center) * interact_distance
+	#var query = PhysicsRayQueryParameters3D.create(origin,end)
+	#query.collide_with_bodies = true
+	#var result = space_state.intersect_ray(query)
+	#var current_cast_result = result.get("collider")
+	#if current_cast_result != interact_cast_result:
+		#if interact_cast_result and interact_cast_result.has_user_signal("unfocused"):
+			#interact_cast_result.emit_signal("unfocused")
+			##print("unfocused")
+		#interact_cast_result = current_cast_result
+		#if interact_cast_result and interact_cast_result.has_user_signal("focused"):
+			#interact_cast_result.emit_signal("focused")
+			##print("focused")
+	#
+#func interact() ->void:
+	#if interact_cast_result and interact_cast_result.has_user_signal("interacted"):
+		#interact_cast_result.emit_signal("interacted")
+		##print("interacted")
+	#
+	#

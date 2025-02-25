@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://sb8ljfw7ljuj"]
+[gd_scene load_steps=37 format=3 uid="uid://sb8ljfw7ljuj"]
 
 [ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerController.gd" id="1_p0mwa"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerReticle.gd" id="2_ngm4u"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://5iuesaepmq84" path="res://UI/Themes/debug.tres" id="3_lpptg"]
 [ext_resource type="PackedScene" uid="uid://ck7sv38i12fj5" path="res://Scenes/Weapons/Weapon.tscn" id="3_wh8nb"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerDebug.gd" id="4_mevor"]
+[ext_resource type="Script" path="res://Assets/InteractMaterial/InteractionRaycast.gd" id="4_xg8qg"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerStateMachine.gd" id="5_w4fw7"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/IdlePlayerState.gd" id="6_k1wog"]
 [ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/WalkingPlayerState.gd" id="7_63l7o"]
@@ -21,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://gaxxc2scknsg" path="res://Assets/shooting/HandgunLoad.wav" id="17_2oflj"]
 [ext_resource type="AudioStream" uid="uid://cch1ibjkox1ob" path="res://Assets/shooting/HandgunShoot.wav" id="18_r02ht"]
 [ext_resource type="PackedScene" uid="uid://4ro1qmi62qew" path="res://Assets/WalkingSounds/footstep.tscn" id="19_rc5ap"]
+[ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerPhysicsComponent.gd" id="23_bnn4o"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hcf0t"]
 
@@ -468,7 +470,7 @@ _data = {
 [sub_resource type="LabelSettings" id="LabelSettings_ovn3p"]
 font_size = 30
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("weapon_controller", "crouch_shapecast", "camera_controller")]
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("weapon_controller", "crouch_shapecast", "camera_controller") groups=["player"]]
 script = ExtResource("1_p0mwa")
 weapon_controller = NodePath("CameraController/Recoil/Camera3D/WeaponRig/Weapon")
 crouch_shapecast = NodePath("CrouchShapeCast")
@@ -494,6 +496,12 @@ speed = 4.0
 weapon = NodePath("Camera3D/WeaponRig/Weapon")
 
 [node name="Camera3D" type="Camera3D" parent="CameraController/Recoil"]
+
+[node name="InteractionRaycast" type="RayCast3D" parent="CameraController/Recoil/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.00267036, -0.999996, 0, 0.999996, 0.00267036, 0, 0, 0)
+target_position = Vector3(0, -2, 0)
+hit_back_faces = false
+script = ExtResource("4_xg8qg")
 
 [node name="WeaponRig" type="Node3D" parent="CameraController/Recoil/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00614738, 0)
@@ -647,5 +655,11 @@ bus = &"Handgun"
 [node name="HandgunShoot" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource("18_r02ht")
 bus = &"Handgun"
+
+[node name="PhysicsComponent" type="Node" parent="." node_paths=PackedStringArray("controller")]
+script = ExtResource("23_bnn4o")
+controller = NodePath("..")
+force = 10.0
+enabled = true
 
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
