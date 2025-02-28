@@ -4,10 +4,14 @@ extends Node3D
 
 signal weapon_fired
 #signal enemy_hit(damage)
+@onready var recoil_position: Node3D = $RecoilPosition
+
 
 @onready var handgun_load: AudioStreamPlayer3D = $"../../../../../Sounds/HandgunLoad"
 @onready var handgun_shoot: AudioStreamPlayer3D = $"../../../../../Sounds/HandgunShoot"
-
+@onready var weapon_anim: AnimationPlayer = $AnimationPlayer
+var bullet = load("res://Scenes/Weapons/Bullet.tscn")
+var bullet_instance
 
 @export var weapon_type: Weapons:
 	set(value):
@@ -39,7 +43,7 @@ var raycast_test = preload("res://Assets/shooting/raycast_test.tscn")
 var shoot_toggle:bool=false
 var weapon1_toggle:bool=false
 var weapon2_toggle:bool=true
-var damage 
+var damage : float = 15
 
 func _ready()->void:
 	await owner.ready
@@ -130,21 +134,39 @@ func _attack() -> void:
 	var space_state = camera.get_world_3d().direct_space_state
 	var screen_center = get_viewport().size / 2
 	var origin = camera.project_ray_origin(screen_center)
-	var end = origin + camera.project_ray_normal(screen_center) * 1000
-	var query = PhysicsRayQueryParameters3D.create(origin,end)
-	query.collide_with_bodies = true
-	var result = space_state.intersect_ray(query)
-	var result_collider= result.get("collider")
-	#print(screen_center)
-	if result and shoot_toggle==true:
+	#HANDGUN
+	if shoot_toggle==true:
+		var end = origin + camera.project_ray_normal(screen_center) * 1000
+		var query = PhysicsRayQueryParameters3D.create(origin,end)
+		query.collide_with_bodies = true
+		var result = space_state.intersect_ray(query)
+		var result_collider= result.get("collider")
+		weapon_anim.stop()
 		weapon_fired.emit()
 		handgun_shoot.play()
 		_bullet_hole(result.get("position"), result.get("normal"))
-	if result and shoot_toggle==true and result_collider.is_in_group("enemy"):
-		print("enemy shot")
-		MessageBus.enemy_shot.emit(damage)
+		if result_collider.is_in_group("enemy1"):
+			MessageBus.emit_signal("enemy1_hit",damage)
+		if result_collider.is_in_group("enemy2"):
+			MessageBus.emit_signal("enemy2_hit",damage)
+	#CROWBAR		
 	if shoot_toggle==false:
-		pass
+		weapon_anim.play("CrowbarAttack")
+		var end = origin + camera.project_ray_normal(screen_center) * 1
+		var query = PhysicsRayQueryParameters3D.create(origin,end)
+		query.collide_with_bodies = true
+		var result = space_state.intersect_ray(query)
+		var result_collider= result.get("collider")
+		#print(result_collider)
+		if result_collider == null:
+			pass
+		elif result_collider.is_in_group("enemy"):
+			MessageBus.emit_signal("enemy_hit",damage)
+			
+
+		
+		
+		
 		
 func _bullet_hole(position: Vector3, normal : Vector3)-> void:
 	var instance = raycast_test.instantiate()

@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv0idtovpslb2"]
+
+[ext_resource type="Script" path="res://Scenes/Items/Flashlight.gd" id="1_vhx0u"]
+[ext_resource type="AudioStream" uid="uid://bcbhp004oggvm" path="res://Assets/Flashlight/flashlight.mp3" id="5_335oa"]
+
+[node name="Flashlight" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_vhx0u")
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.292063)
+light_energy = 8.0
+light_volumetric_fog_energy = 0.0
+light_bake_mode = 0
+shadow_bias = 2.03
+shadow_reverse_cull_face = true
+distance_fade_begin = 3.0
+distance_fade_shadow = 5.0
+distance_fade_length = 5.0
+spot_range = 10.0
+spot_angle = 50.0
+spot_angle_attenuation = 3.73212
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="SpotLight3D2"]
+transform = Transform3D(0.999516, 0.00172858, 0.0310477, -0.00172064, 0.999999, -0.000282422, -0.0310481, 0.000228867, 0.999518, -0.00229684, 0.0291461, -0.00456935)
+light_energy = 5.0
+light_bake_mode = 0
+shadow_bias = 2.03
+shadow_reverse_cull_face = true
+distance_fade_begin = 3.0
+distance_fade_shadow = 5.0
+distance_fade_length = 5.0
+spot_range = 10.0
+spot_angle = 35.0
+spot_angle_attenuation = 3.73212
+
+[node name="click" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_335oa")

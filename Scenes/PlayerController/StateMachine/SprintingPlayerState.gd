@@ -11,6 +11,7 @@ extends PlayerMovementState
 @export var weapon_bob_h: float = 2.5
 @export var weapon_bob_v : float = 1.5
 
+
 func enter(previous_state) -> void:
 	if animation.is_playing() and animation.current_animation == "jumpend":
 		await animation.animation_finished
@@ -29,7 +30,7 @@ func update(delta):
 	
 	weapon.sway_weapon(delta, false)
 	weapon._weapon_bob(delta, weapon_bob_spd, weapon_bob_h, weapon_bob_v)
-	
+
 	set_animation_speed(player.velocity.length())
 	
 	if Input.is_action_just_released("sprint"):
