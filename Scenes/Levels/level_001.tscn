@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://blhbc6wlxbb51"]
+[gd_scene load_steps=50 format=3 uid="uid://blhbc6wlxbb51"]
 
 [ext_resource type="PackedScene" uid="uid://tgci17fawpxo" path="res://Scenes/WorldEnvironment/WorldEnvLevel001.tscn" id="1_x5d3c"]
 [ext_resource type="PackedScene" uid="uid://sb8ljfw7ljuj" path="res://Scenes/PlayerController/PlayerController.tscn" id="2_5kh5m"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://Assets/InteractMaterial/interaction_component.gd" id="5_b0leo"]
 [ext_resource type="Script" path="res://Assets/InteractMaterial/PickUpComponent.gd" id="6_8emik"]
 [ext_resource type="Script" path="res://Assets/InteractMaterial/door_component.gd" id="6_lb5hw"]
+[ext_resource type="PackedScene" uid="uid://dbqjgy3iwwlq4" path="res://Scenes/Enemy/EnemyController.tscn" id="8_mjilo"]
+[ext_resource type="Script" path="res://Scenes/Enemy/HealthComponent.gd" id="9_7e1gi"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_78lkn"]
 size = Vector3(20, 0.1, 20)
@@ -749,6 +751,13 @@ script = ExtResource("6_8emik")
 [node name="InteractionComponent" type="Node" parent="DoorWall/AnimatableBody3D"]
 script = ExtResource("5_b0leo")
 context = "interact"
+
+[node name="enemycontroller" parent="." instance=ExtResource("8_mjilo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06156, 15.7741)
+
+[node name="HealthComponent" type="Node" parent="enemycontroller"]
+script = ExtResource("9_7e1gi")
+health = 200.0
 
 [connection signal="body_entered" from="DoorWall/AnimatableBody3D/DoorComponent" to="DoorWall/AnimatableBody3D/DoorComponent" method="on_trigger"]
 [connection signal="body_exited" from="DoorWall/AnimatableBody3D/DoorComponent" to="DoorWall/AnimatableBody3D/DoorComponent" method="off_trigger"]

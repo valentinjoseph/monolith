@@ -3,6 +3,8 @@ class_name WeaponController
 extends Node3D
 
 signal weapon_fired
+#signal enemy_hit(damage)
+
 @onready var handgun_load: AudioStreamPlayer3D = $"../../../../../Sounds/HandgunLoad"
 @onready var handgun_shoot: AudioStreamPlayer3D = $"../../../../../Sounds/HandgunShoot"
 
@@ -37,6 +39,7 @@ var raycast_test = preload("res://Assets/shooting/raycast_test.tscn")
 var shoot_toggle:bool=false
 var weapon1_toggle:bool=false
 var weapon2_toggle:bool=true
+var damage 
 
 func _ready()->void:
 	await owner.ready
@@ -48,6 +51,8 @@ func _input(event):
 		shoot_toggle=false
 		weapon2_toggle=true
 		weapon1_toggle=false
+		damage= 15
+		#print(damage)
 		load_weapon()
 	if event.is_action_pressed("weapon2") and weapon2_toggle==true:
 		weapon_type=load("res://Models/weapons/handgun/HandgunResource.tres")
@@ -55,6 +60,8 @@ func _input(event):
 		shoot_toggle=true
 		weapon2_toggle=false
 		weapon1_toggle=true
+		damage=25
+		#print(damage)
 		load_weapon()
 		
 	if event is InputEventMouseMotion:
@@ -127,11 +134,15 @@ func _attack() -> void:
 	var query = PhysicsRayQueryParameters3D.create(origin,end)
 	query.collide_with_bodies = true
 	var result = space_state.intersect_ray(query)
+	var result_collider= result.get("collider")
 	#print(screen_center)
 	if result and shoot_toggle==true:
 		weapon_fired.emit()
 		handgun_shoot.play()
 		_bullet_hole(result.get("position"), result.get("normal"))
+	if result and shoot_toggle==true and result_collider.is_in_group("enemy"):
+		print("enemy shot")
+		MessageBus.enemy_shot.emit(damage)
 	if shoot_toggle==false:
 		pass
 		
@@ -142,6 +153,7 @@ func _bullet_hole(position: Vector3, normal : Vector3)-> void:
 	instance.look_at(instance.global_transform.origin + normal, Vector3.UP )
 	if normal != Vector3.UP and normal != Vector3.DOWN:
 		instance.rotate_object_local(Vector3(1,0,0), 90)
+		
 		
 	
 	await get_tree().create_timer(2).timeout
