@@ -137,7 +137,7 @@ func _attack() -> void:
 		weapon_fired.emit()
 		handgun_shoot.play()
 		_bullet_hole(result.get("position"), result.get("normal"))
-		if result_collider.is_in_group("enemy"):
+		if result_collider.is_in_group("enemy") or result_collider.is_in_group("object"):
 			#print("result_collider: ", result_collider)
 			MessageBus.emit_signal("enemy_hit",result_collider, damage)
 			#print("enemy shot")	

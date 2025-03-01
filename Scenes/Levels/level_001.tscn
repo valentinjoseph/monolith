@@ -156,6 +156,9 @@ albedo_color = Color(0.913725, 0.686275, 0.0470588, 1)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h8g8p"]
 points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c0n2f"]
+radius = 0.6
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5peir"]
 albedo_color = Color(0.914879, 0.686165, 0.0453381, 1)
 
@@ -189,9 +192,6 @@ points = PackedVector3Array(-0.65, -1.1, -0.05, -0.65, -1.1, 0.05, -0.65, 1.1, -
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f14pb"]
 radius = 2.0
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c0n2f"]
-radius = 0.6
 
 [node name="Level_001" type="Node3D"]
 
@@ -654,6 +654,13 @@ context = "pick up"
 [node name="PickUpComponent" type="Node" parent="InteractableObjects/PickBox/InteractionComponent"]
 script = ExtResource("6_8emik")
 
+[node name="HealthComponent" type="Area3D" parent="InteractableObjects/PickBox"]
+script = ExtResource("9_5xlqx")
+health = 50.0
+
+[node name="HealthCollide" type="CollisionShape3D" parent="InteractableObjects/PickBox/HealthComponent"]
+shape = SubResource("CapsuleShape3D_c0n2f")
+
 [node name="PickBox2" type="RigidBody3D" parent="InteractableObjects" groups=["object"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.593928, 1.73649)
 mass = 10.0
@@ -672,7 +679,14 @@ context = "pick up"
 [node name="PickUpComponent" type="Node" parent="InteractableObjects/PickBox2/InteractionComponent"]
 script = ExtResource("6_8emik")
 
-[node name="PickBox3" type="RigidBody3D" parent="InteractableObjects"]
+[node name="HealthComponent" type="Area3D" parent="InteractableObjects/PickBox2"]
+script = ExtResource("9_5xlqx")
+health = 50.0
+
+[node name="HealthCollide" type="CollisionShape3D" parent="InteractableObjects/PickBox2/HealthComponent"]
+shape = SubResource("CapsuleShape3D_c0n2f")
+
+[node name="PickBox3" type="RigidBody3D" parent="InteractableObjects" groups=["object"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.593928, -1.73664)
 mass = 10.0
 
@@ -690,7 +704,14 @@ context = "pick up"
 [node name="PickUpComponent" type="Node" parent="InteractableObjects/PickBox3/InteractionComponent"]
 script = ExtResource("6_8emik")
 
-[node name="PickSphere" type="RigidBody3D" parent="InteractableObjects"]
+[node name="HealthComponent" type="Area3D" parent="InteractableObjects/PickBox3"]
+script = ExtResource("9_5xlqx")
+health = 50.0
+
+[node name="HealthCollide" type="CollisionShape3D" parent="InteractableObjects/PickBox3/HealthComponent"]
+shape = SubResource("CapsuleShape3D_c0n2f")
+
+[node name="PickSphere" type="RigidBody3D" parent="InteractableObjects" groups=["object"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.593928, -3.24962)
 mass = 10.0
 
@@ -707,6 +728,13 @@ context = "pick up"
 
 [node name="PickUpComponent" type="Node" parent="InteractableObjects/PickSphere/InteractionComponent"]
 script = ExtResource("6_8emik")
+
+[node name="HealthComponent" type="Area3D" parent="InteractableObjects/PickSphere"]
+script = ExtResource("9_5xlqx")
+health = 50.0
+
+[node name="HealthCollide" type="CollisionShape3D" parent="InteractableObjects/PickSphere/HealthComponent"]
+shape = SubResource("CapsuleShape3D_c0n2f")
 
 [node name="DoorWall" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.17711, 1.55315, -4.11945)
