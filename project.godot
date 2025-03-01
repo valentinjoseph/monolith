@@ -30,8 +30,7 @@ window/vsync/vsync_mode=0
 
 player=""
 object=""
-enemy1=""
-enemy2=""
+enemy=""
 
 [input]
 

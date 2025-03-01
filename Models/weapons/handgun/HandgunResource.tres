@@ -20,4 +20,4 @@ idle_sway_rotation_strength = 300.0
 random_sway_amount = 5.0
 mesh = ExtResource("1_hu4xf")
 shadow = false
-damage_amount = 0.0
+damage_amount = 25.0

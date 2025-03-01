@@ -40,10 +40,10 @@ var idle_sway_rotation_strength
 var weapon_bob_amount : Vector2 = Vector2(0,0)
 
 var raycast_test = preload("res://Assets/shooting/raycast_test.tscn")
-var shoot_toggle:bool=false
+var shoot_toggle:bool=true
 var weapon1_toggle:bool=false
-var weapon2_toggle:bool=true
-var damage : float = 15
+var weapon2_toggle:bool=false
+var damage : float = 25
 
 func _ready()->void:
 	await owner.ready
@@ -51,22 +51,14 @@ func _ready()->void:
 
 func _input(event):
 	if event.is_action_pressed("weapon1") and weapon1_toggle==true:
-		weapon_type=load("res://Models/weapons/crowbar/CrowbarResource.tres")
+		weapon_type=load("res://Models/weapons/handgun/HandgunResource.tres")
 		shoot_toggle=false
 		weapon2_toggle=true
 		weapon1_toggle=false
-		damage= 15
+		damage= 25
 		#print(damage)
 		load_weapon()
-	if event.is_action_pressed("weapon2") and weapon2_toggle==true:
-		weapon_type=load("res://Models/weapons/handgun/HandgunResource.tres")
-		handgun_load.play()
-		shoot_toggle=true
-		weapon2_toggle=false
-		weapon1_toggle=true
-		damage=25
-		#print(damage)
-		load_weapon()
+	
 		
 	if event is InputEventMouseMotion:
 		mouse_movement=event.relative	
@@ -145,24 +137,10 @@ func _attack() -> void:
 		weapon_fired.emit()
 		handgun_shoot.play()
 		_bullet_hole(result.get("position"), result.get("normal"))
-		if result_collider.is_in_group("enemy1"):
-			MessageBus.emit_signal("enemy1_hit",damage)
-		if result_collider.is_in_group("enemy2"):
-			MessageBus.emit_signal("enemy2_hit",damage)
-	#CROWBAR		
-	if shoot_toggle==false:
-		weapon_anim.play("CrowbarAttack")
-		var end = origin + camera.project_ray_normal(screen_center) * 1
-		var query = PhysicsRayQueryParameters3D.create(origin,end)
-		query.collide_with_bodies = true
-		var result = space_state.intersect_ray(query)
-		var result_collider= result.get("collider")
-		#print(result_collider)
-		if result_collider == null:
-			pass
-		elif result_collider.is_in_group("enemy"):
-			MessageBus.emit_signal("enemy_hit",damage)
-			
+		if result_collider.is_in_group("enemy"):
+			#print("result_collider: ", result_collider)
+			MessageBus.emit_signal("enemy_hit",result_collider, damage)
+			#print("enemy shot")	
 
 		
 		

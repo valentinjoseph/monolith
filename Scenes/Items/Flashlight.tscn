@@ -4,7 +4,6 @@
 [ext_resource type="AudioStream" uid="uid://bcbhp004oggvm" path="res://Assets/Flashlight/flashlight.mp3" id="5_335oa"]
 
 [node name="Flashlight" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_vhx0u")
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="."]
