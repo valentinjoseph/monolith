@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbqjgy3iwwlq4"]
+[gd_scene load_steps=8 format=3 uid="uid://dbqjgy3iwwlq4"]
 
 [ext_resource type="Script" path="res://Scenes/Enemy/EnemyController.gd" id="1_fftyv"]
+[ext_resource type="Script" path="res://Scenes/Enemy/EnemyStateMachine.gd" id="2_0j5va"]
+[ext_resource type="Script" path="res://Scenes/Enemy/states/IdleEnemyState.gd" id="3_5hvgl"]
+[ext_resource type="Script" path="res://Scenes/Enemy/states/WanderEnemyState.gd" id="4_b81iq"]
+[ext_resource type="Script" path="res://Scenes/Enemy/states/ChaseEnemyState.gd" id="5_53f5w"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_yg5yj"]
 
@@ -17,3 +21,31 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_wukpe")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+debug_path_custom_color = Color(1, 1, 0, 1)
+debug_path_custom_point_size = 8.37
+
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("default_state")]
+script = ExtResource("2_0j5va")
+default_state = NodePath("WanderEnemyState")
+
+[node name="IdleEnemyState" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("3_5hvgl")
+chase_range = 5.0
+controller_path = NodePath("../..")
+
+[node name="WanderEnemyState" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("4_b81iq")
+max_wander_range = 10.0
+min_wait_time = 0.1
+max_wait_time = 0.2
+chase_range = 10.0
+controller_path = NodePath("../..")
+
+[node name="ChaseEnemyState" type="Node" parent="EnemyStateMachine"]
+script = ExtResource("5_53f5w")
+controller_path = NodePath("../..")
+
+[connection signal="navigation_finished" from="NavigationAgent3D" to="EnemyStateMachine" method="_on_navigation_agent_3d_navigation_finished"]
