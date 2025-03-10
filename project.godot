@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://UI/global.gd"
-MessageBus="*res://UI/message_bus.gd"
+Global="*res://Assets/global.gd"
+MessageBus="*res://Assets/message_bus.gd"
 
 [display]
 

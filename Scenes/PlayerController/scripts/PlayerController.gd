@@ -17,6 +17,8 @@ var start_position: Vector3
 var initial_rotation:Vector3
 var mouse_input_disabled: bool = false
 var collision_check_distance: float= 1.0
+var dash_cooldown: float = 10.0
+var dash_toggle:bool=true
 @onready var collide_raycast: RayCast3D = $CameraController/Camera3D/CollideRaycast
 
 #weapons
@@ -124,7 +126,7 @@ func update_velocity() -> void:
 	move_and_slide()
 
 func _process(delta)->void:	
-	if is_dashing==true:
+	if is_dashing==true and dash_toggle==false:
 		rotation=initial_rotation
 		mouse_input_disabled = true
 		collide_raycast.force_raycast_update()
@@ -138,11 +140,14 @@ func _process(delta)->void:
 		if position.distance_to(start_position) >= dash_distance:
 			mouse_input_disabled = false
 			is_dashing=false
+		await get_tree().create_timer(dash_cooldown).timeout
+		dash_toggle=true
 	else:
-		if Input.is_action_just_pressed("teleport"):
+		if Input.is_action_just_pressed("teleport") and dash_toggle==true:
 			start_position=position
 			initial_rotation=rotation
 			is_dashing=true
+			dash_toggle=false
 
 #func interact_cast()->void:
 	#var camera = Global.player.camera_controller
