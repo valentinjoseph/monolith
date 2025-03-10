@@ -32,4 +32,4 @@ func update(delta):
 		#state_machine._kill()
 	
 	if controller.player_distance > lose_interest_range:
-		state_machine.change_state("wander")
+		state_machine.change_state("WanderEnemyState")

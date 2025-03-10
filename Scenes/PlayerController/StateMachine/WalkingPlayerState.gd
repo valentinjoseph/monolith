@@ -28,8 +28,8 @@ func update(delta):
 	player.update_input(speed,acceleration,deceleration)
 	player.update_velocity()
 
-	weapon.sway_weapon(delta, false)
-	weapon._weapon_bob(delta, weapon_bob_spd, weapon_bob_h, weapon_bob_v)
+	#weapon.sway_weapon(delta, false)
+	#weapon._weapon_bob(delta, weapon_bob_spd, weapon_bob_h, weapon_bob_v)
 
 	set_animation_speed(player.velocity.length())
 	
@@ -43,10 +43,10 @@ func update(delta):
 		
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
 		transition.emit("JumpingPlayerState")
-		
-	if Input.is_action_just_pressed("attack"):
-		weapon._attack()
-		
+		#
+	#if Input.is_action_just_pressed("attack"):
+		#weapon._attack()
+		#
 	if player.velocity.length() == 0.0:
 		transition.emit("IdlePlayerState")
 		

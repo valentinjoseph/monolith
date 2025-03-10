@@ -32,7 +32,7 @@ func change_state(state_name):
 		
 	current_state = new_state
 	new_state.enter()
-
+	Global.debug.add_property("Enemy State", new_state, 4)
 func _process(delta):
 	if current_state != null:
 		current_state.update(delta)

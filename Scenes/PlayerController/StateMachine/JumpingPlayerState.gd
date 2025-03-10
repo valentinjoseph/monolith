@@ -27,15 +27,15 @@ func update(delta):
 	player.update_input(speed * input_multiplier,acceleration,deceleration)
 	player.update_velocity()
 	
-	weapon.sway_weapon(delta, false)
-	weapon._weapon_bob(delta, weapon_bob_spd, weapon_bob_h, weapon_bob_v)
+	#weapon.sway_weapon(delta, false)
+	#weapon._weapon_bob(delta, weapon_bob_spd, weapon_bob_h, weapon_bob_v)
 	
 	if Input.is_action_just_pressed("jump") and double_jump==false:
 		double_jump=true
 		player.velocity.y=double_jump_velocity
 	
-	if Input.is_action_just_pressed("attack"):
-		weapon._attack()
+	#if Input.is_action_just_pressed("attack"):
+		#weapon._attack()
 		
 	if Input.is_action_just_released("jump"):
 		if player.velocity.y > 0:

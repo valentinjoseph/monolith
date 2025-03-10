@@ -2,8 +2,8 @@ extends EnemyState
 
 var home_position : Vector3
 @export var max_wander_range : float = 6
-@export var min_wait_time : float = 0.2
-@export var max_wait_time : float = 2.0
+@export var min_wait_time : float = 0.0
+@export var max_wait_time : float = 0.0
 @export var chase_range : float = 4.0
 #@onready var anim: AnimationPlayer = $"../../AnimationPlayer"
 

@@ -18,4 +18,4 @@ func exit():
 
 func update(delta):
 	if controller.player_distance < chase_range:
-		state_machine.change_state("wander")
+		state_machine.change_state("WanderEnemyState")

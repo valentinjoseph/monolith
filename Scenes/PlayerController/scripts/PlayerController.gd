@@ -1,5 +1,8 @@
 class_name Player extends CharacterBody3D
 
+
+
+
 #characters movements
 var _speed: float
 var _current_rotation:float
@@ -81,7 +84,7 @@ func _ready():
 	
 func _physics_process(delta: float) -> void:
 	#Global.debug.add_property("MovementSpeed", _speed, 2)
-	
+
 	_update_camera(delta)
 	#interact_cast()
 

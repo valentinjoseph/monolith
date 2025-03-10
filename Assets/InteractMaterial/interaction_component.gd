@@ -33,15 +33,25 @@ func not_in_range() -> void:
 	
 func on_interact()-> void:
 	player_interacted.emit(parent)
+	#MessageBus.interaction_unfocused.emit()
+	
+func on_throw()->void:
+	player_interacted.emit(parent)
+	mesh.material_overlay = null
+	MessageBus.interaction_unfocused.emit()
+	
+	
+	
 	
 func connect_parent() -> void:
 	parent.add_user_signal("focused")
 	parent.add_user_signal("unfocused")
 	parent.add_user_signal("interacted")
+	parent.add_user_signal("thrown")
 	parent.connect("focused", Callable(self,"in_range"))
 	parent.connect("unfocused", Callable(self,"not_in_range"))
 	parent.connect("interacted", Callable(self,"on_interact"))
-
+	parent.connect("thrown", Callable(self, "on_throw"))
 
 func set_default_mesh()->void:
 	if mesh:

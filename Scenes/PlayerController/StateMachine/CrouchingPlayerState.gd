@@ -30,18 +30,18 @@ func update(delta):
 	player.update_gravity(delta)
 	player.update_input(speed,acceleration,deceleration)
 	player.update_velocity()
-	
-	weapon.sway_weapon(delta, false)
-	weapon._weapon_bob(delta, weapon_bob_spd, weapon_bob_h, weapon_bob_v)
-	
+	#
+	#weapon.sway_weapon(delta, false)
+	#weapon._weapon_bob(delta, weapon_bob_spd, weapon_bob_h, weapon_bob_v)
+	#
 	if Input.is_action_just_released("crouch"):
 		uncrouch()
 	elif Input.is_action_pressed("crouch")==false and released==false:
 		released = true
 		uncrouch()
 	
-	if Input.is_action_just_pressed("attack"):
-		weapon._attack()
+	#if Input.is_action_just_pressed("attack"):
+		#weapon._attack()
 		
 func uncrouch():
 	if crouch_shapecast.is_colliding()==false and Input.is_action_pressed("crouch")==false:

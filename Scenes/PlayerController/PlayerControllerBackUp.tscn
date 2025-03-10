@@ -1,28 +1,30 @@
-[gd_scene load_steps=37 format=3 uid="uid://sb8ljfw7ljuj"]
+[gd_scene load_steps=39 format=3 uid="uid://cvrcqpb0o4a5k"]
 
-[ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerController.gd" id="1_p0mwa"]
-[ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerReticle.gd" id="2_ngm4u"]
-[ext_resource type="Script" path="res://Scenes/Weapons/scripts/GravityGun.gd" id="3_0wr34"]
-[ext_resource type="Theme" uid="uid://5iuesaepmq84" path="res://UI/Themes/debug.tres" id="3_lpptg"]
-[ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerDebug.gd" id="4_mevor"]
-[ext_resource type="Script" path="res://Assets/InteractMaterial/InteractionRaycast.gd" id="4_xg8qg"]
-[ext_resource type="PackedScene" uid="uid://cv0idtovpslb2" path="res://Scenes/Items/Flashlight.tscn" id="5_3p6lb"]
-[ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerStateMachine.gd" id="5_w4fw7"]
-[ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/IdlePlayerState.gd" id="6_k1wog"]
-[ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/WalkingPlayerState.gd" id="7_63l7o"]
-[ext_resource type="PackedScene" uid="uid://bhqqq7b74phjf" path="res://Scenes/Menus/pause_menu.tscn" id="7_r50lb"]
-[ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/SprintingPlayerState.gd" id="8_gmhfp"]
-[ext_resource type="Script" path="res://Assets/InteractMaterial/context_component.gd" id="8_hgcel"]
-[ext_resource type="Texture2D" uid="uid://c64vjnybj08eu" path="res://Assets/InteractMaterial/keyboard_e.png" id="9_ljdc6"]
-[ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/CrouchingPlayerState.gd" id="9_mvqn6"]
-[ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/SlidingPlayerState.gd" id="10_u64vi"]
-[ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/JumpingPlayerState.gd" id="11_8lg56"]
-[ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/FallingPlayerState.gd" id="12_hkira"]
-[ext_resource type="AudioStream" uid="uid://b41e7d8c6iv70" path="res://Assets/SlidingSounds/ClothSlide.wav" id="16_cnonj"]
-[ext_resource type="AudioStream" uid="uid://gaxxc2scknsg" path="res://Assets/shooting/HandgunLoad.wav" id="17_2oflj"]
-[ext_resource type="AudioStream" uid="uid://cch1ibjkox1ob" path="res://Assets/shooting/HandgunShoot.wav" id="18_r02ht"]
-[ext_resource type="PackedScene" uid="uid://4ro1qmi62qew" path="res://Assets/WalkingSounds/footstep.tscn" id="19_rc5ap"]
-[ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerPhysicsComponent.gd" id="23_bnn4o"]
+[ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerController.gd" id="1_roque"]
+[ext_resource type="Script" path="res://Scenes/Weapons/scripts/weapon_recoil.gd" id="2_joqbb"]
+[ext_resource type="Script" path="res://Scenes/Weapons/scripts/GravityGun.gd" id="3_3xbsx"]
+[ext_resource type="Script" path="res://Assets/InteractMaterial/InteractionRaycast.gd" id="4_s6o74"]
+[ext_resource type="PackedScene" uid="uid://ck7sv38i12fj5" path="res://Scenes/Weapons/Weapon.tscn" id="5_vl43k"]
+[ext_resource type="PackedScene" uid="uid://cv0idtovpslb2" path="res://Scenes/Items/Flashlight.tscn" id="6_w2iiu"]
+[ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerReticle.gd" id="7_3fpwc"]
+[ext_resource type="Theme" uid="uid://5iuesaepmq84" path="res://UI/Themes/debug.tres" id="8_fhlbk"]
+[ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerDebug.gd" id="9_0sduy"]
+[ext_resource type="PackedScene" uid="uid://bhqqq7b74phjf" path="res://Scenes/Menus/pause_menu.tscn" id="10_st842"]
+[ext_resource type="Script" path="res://Assets/InteractMaterial/context_component.gd" id="11_0fqhv"]
+[ext_resource type="Texture2D" uid="uid://c64vjnybj08eu" path="res://Assets/InteractMaterial/keyboard_e.png" id="12_g8dj2"]
+[ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerStateMachine.gd" id="13_q6wcb"]
+[ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/IdlePlayerState.gd" id="14_2gd0p"]
+[ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/WalkingPlayerState.gd" id="15_ued74"]
+[ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/SprintingPlayerState.gd" id="16_3nfpv"]
+[ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/CrouchingPlayerState.gd" id="17_l2ytw"]
+[ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/SlidingPlayerState.gd" id="18_aueyo"]
+[ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/JumpingPlayerState.gd" id="19_4qt0t"]
+[ext_resource type="Script" path="res://Scenes/PlayerController/StateMachine/FallingPlayerState.gd" id="20_fe7hf"]
+[ext_resource type="PackedScene" uid="uid://4ro1qmi62qew" path="res://Assets/WalkingSounds/footstep.tscn" id="21_bseoi"]
+[ext_resource type="AudioStream" uid="uid://b41e7d8c6iv70" path="res://Assets/SlidingSounds/ClothSlide.wav" id="22_mey2s"]
+[ext_resource type="AudioStream" uid="uid://gaxxc2scknsg" path="res://Assets/shooting/HandgunLoad.wav" id="23_j3k4j"]
+[ext_resource type="AudioStream" uid="uid://cch1ibjkox1ob" path="res://Assets/shooting/HandgunShoot.wav" id="24_c1cby"]
+[ext_resource type="Script" path="res://Scenes/PlayerController/scripts/PlayerPhysicsComponent.gd" id="25_sok68"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hcf0t"]
 
@@ -105,7 +107,7 @@ tracks/5/keys = {
 tracks/6/type = "bezier"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("CameraController/Camera3D:position:x")
+tracks/6/path = NodePath("CameraController/Recoil/Camera3D:position:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -116,7 +118,7 @@ tracks/6/keys = {
 tracks/7/type = "bezier"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("CameraController/Camera3D:position:y")
+tracks/7/path = NodePath("CameraController/Recoil/Camera3D:position:y")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -127,7 +129,7 @@ tracks/7/keys = {
 tracks/8/type = "bezier"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("CameraController/Camera3D:position:z")
+tracks/8/path = NodePath("CameraController/Recoil/Camera3D:position:z")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -174,7 +176,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("CameraController/Camera3D:fov")
+tracks/12/path = NodePath("CameraController/Recoil/Camera3D:fov")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -368,7 +370,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("CameraController/Camera3D:fov")
+tracks/7/path = NodePath("CameraController/Recoil/Camera3D:fov")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -385,7 +387,7 @@ loop_mode = 1
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CameraController/Camera3D:position:x")
+tracks/0/path = NodePath("CameraController/Recoil/Camera3D:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -396,7 +398,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CameraController/Camera3D:position:y")
+tracks/1/path = NodePath("CameraController/Recoil/Camera3D:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -407,7 +409,7 @@ tracks/1/keys = {
 tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CameraController/Camera3D:position:z")
+tracks/2/path = NodePath("CameraController/Recoil/Camera3D:position:z")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -470,10 +472,11 @@ _data = {
 [sub_resource type="LabelSettings" id="LabelSettings_ovn3p"]
 font_size = 30
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("crouch_shapecast", "camera_controller") groups=["player"]]
-script = ExtResource("1_p0mwa")
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("weapon_controller", "crouch_shapecast", "camera_controller") groups=["player"]]
+script = ExtResource("1_roque")
+weapon_controller = NodePath("CameraController/Recoil/Camera3D/WeaponRig/Weapon")
 crouch_shapecast = NodePath("CrouchShapeCast")
-camera_controller = NodePath("CameraController/Camera3D")
+camera_controller = NodePath("CameraController/Recoil/Camera3D")
 
 [node name="PlayerCollide" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -486,19 +489,29 @@ surface_material_override/0 = SubResource("StandardMaterial3D_6cse8")
 [node name="CameraController" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraController"]
-script = ExtResource("3_0wr34")
+[node name="Recoil" type="Node3D" parent="CameraController" node_paths=PackedStringArray("weapon")]
+script = ExtResource("2_joqbb")
+recoil_amount = Vector3(0.15, 0.05, 0)
+snap_amount = 8.0
+speed = 4.0
+weapon = NodePath("Camera3D/WeaponRig/Weapon")
 
-[node name="InteractionRaycast" type="RayCast3D" parent="CameraController/Camera3D"]
+[node name="Camera3D" type="Camera3D" parent="CameraController/Recoil"]
+script = ExtResource("3_3xbsx")
+
+[node name="InteractionRaycast" type="RayCast3D" parent="CameraController/Recoil/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 0.00267036, -0.999996, 0, 0.999996, 0.00267036, 0, 0, 0)
-target_position = Vector3(0, -4, 0)
+target_position = Vector3(0, -2, 0)
 hit_back_faces = false
-script = ExtResource("4_xg8qg")
+script = ExtResource("4_s6o74")
 
-[node name="WeaponRig" type="Node3D" parent="CameraController/Camera3D"]
+[node name="WeaponRig" type="Node3D" parent="CameraController/Recoil/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00614738, 0)
 
-[node name="Flashlight" parent="CameraController/Camera3D/WeaponRig" instance=ExtResource("5_3p6lb")]
+[node name="Weapon" parent="CameraController/Recoil/Camera3D/WeaponRig" instance=ExtResource("5_vl43k")]
+transform = Transform3D(-0.001, -8.74228e-11, 0, 4.11817e-12, -4.71064e-05, 0.00099889, -8.73257e-11, 0.00099889, 4.71064e-05, 0.564, -0.746, -0.786)
+
+[node name="Flashlight" parent="CameraController/Recoil/Camera3D/WeaponRig" instance=ExtResource("6_w2iiu")]
 transform = Transform3D(0.999811, -0.00379799, -0.019123, 0.002718, 0.998416, -0.0561893, 0.0193058, 0.0561266, 0.998237, -0.342, 0.00614738, -0.509)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -535,7 +548,7 @@ offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
-script = ExtResource("2_ngm4u")
+script = ExtResource("7_3fpwc")
 reticle_lines = [NodePath("Top"), NodePath("Right"), NodePath("Bottom"), NodePath("Left")]
 player_controller = NodePath("../..")
 
@@ -563,8 +576,8 @@ offset_top = 10.0
 offset_right = 210.0
 offset_bottom = 50.0
 scale = Vector2(2, 2)
-theme = ExtResource("3_lpptg")
-script = ExtResource("4_mevor")
+theme = ExtResource("8_fhlbk")
+script = ExtResource("9_0sduy")
 
 [node name="MarginContainer" type="MarginContainer" parent="UserInterface/DebugPanel"]
 layout_mode = 2
@@ -573,7 +586,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="PauseMenu" parent="UserInterface" instance=ExtResource("7_r50lb")]
+[node name="PauseMenu" parent="UserInterface" instance=ExtResource("10_st842")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -582,7 +595,6 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 
 [node name="ContextComponent" type="CenterContainer" parent="UserInterface" node_paths=PackedStringArray("icon", "context")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -591,10 +603,10 @@ offset_top = 90.0
 offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("8_hgcel")
+script = ExtResource("11_0fqhv")
 icon = NodePath("HBoxContainer/TextureRect")
 context = NodePath("HBoxContainer/Label")
-default_icon = ExtResource("9_ljdc6")
+default_icon = ExtResource("12_g8dj2")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UserInterface/ContextComponent"]
 layout_mode = 2
@@ -608,49 +620,49 @@ label_settings = SubResource("LabelSettings_ovn3p")
 horizontal_alignment = 1
 
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
-script = ExtResource("5_w4fw7")
+script = ExtResource("13_q6wcb")
 current_state = NodePath("IdlePlayerState")
 
 [node name="IdlePlayerState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("6_k1wog")
+script = ExtResource("14_2gd0p")
 
 [node name="WalkingPlayerState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("7_63l7o")
+script = ExtResource("15_ued74")
 
 [node name="SprintingPlayerState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("8_gmhfp")
+script = ExtResource("16_3nfpv")
 
 [node name="CrouchingPlayerState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("9_mvqn6")
+script = ExtResource("17_l2ytw")
 
 [node name="SlidingPlayerState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("10_u64vi")
+script = ExtResource("18_aueyo")
 
 [node name="JumpingPlayerState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("11_8lg56")
+script = ExtResource("19_4qt0t")
 
 [node name="FallingPlayerState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("12_hkira")
+script = ExtResource("20_fe7hf")
 
 [node name="Sounds" type="Node3D" parent="."]
 
-[node name="footstep" parent="Sounds" instance=ExtResource("19_rc5ap")]
+[node name="footstep" parent="Sounds" instance=ExtResource("21_bseoi")]
 bus = &"WalkFootsteps"
 
 [node name="Sliding" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = ExtResource("16_cnonj")
+stream = ExtResource("22_mey2s")
 bus = &"Sliding"
 
 [node name="HandgunLoad" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = ExtResource("17_2oflj")
+stream = ExtResource("23_j3k4j")
 bus = &"Handgun"
 
 [node name="HandgunShoot" type="AudioStreamPlayer3D" parent="Sounds"]
-stream = ExtResource("18_r02ht")
+stream = ExtResource("24_c1cby")
 bus = &"Handgun"
 
 [node name="PhysicsComponent" type="Node" parent="." node_paths=PackedStringArray("controller")]
-script = ExtResource("23_bnn4o")
+script = ExtResource("25_sok68")
 controller = NodePath("..")
 force = 10.0
 enabled = true

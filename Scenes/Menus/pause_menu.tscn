@@ -254,9 +254,9 @@ layout_mode = 2
 layout_direction = 2
 layout_mode = 2
 size_flags_vertical = 3
-text = "E: Interact
+text = "E: Interact / Pick up Objects
+Left Mouse: Throw picked objects
 F: Flashlight
-Tab: Inventory
 Shift: Sprint
 Ctrl: Crouch"
 

@@ -11,13 +11,19 @@ var look_at_player : bool = false
 var move_direction : Vector3
 var target_y_rot : float
 
+@export var health = 100
 
 @onready var agent : NavigationAgent3D = get_node("NavigationAgent3D")
 @onready var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var player = get_tree().get_nodes_in_group("player")[0]
 
+
+
 var player_distance : float
 
+
+	
+	
 func _process(delta):
 	if player != null:
 		player_distance = position.distance_to(player.position) #calculates how far away the player is
@@ -68,4 +74,14 @@ func move_to_position(to_position: Vector3, adjust_pos: bool = true):
 		agent.target_position = adjusted_pos
 	else:
 		agent.target_position = to_position
+		
+
 	
+
+
+func _on_health_component_body_entered(body: Node3D) -> void:
+	if body.is_in_group("thrown_object"):
+		health -= 25
+		print(health)
+		if health <=0:
+			print("fuck this")
