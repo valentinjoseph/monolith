@@ -2,8 +2,8 @@ extends EnemyState
 
 #@onready var anim: AnimationPlayer = $"../../AnimationPlayer"
 
-@export var stop_range : float = 1.0 #where the enemy stops from player
-@export var lose_interest_range : float = 10.0
+@export var stop_range : float = 1.5 #where the enemy stops from player
+@export var lose_interest_range : float = 20
 
 var path_update_rate : float = 0.1
 var last_path_update_time : float
@@ -29,7 +29,7 @@ func update(delta):
 		
 	if controller.player_distance < stop_range:
 		controller.is_stopped=true
-		#state_machine._kill()
+		state_machine._kill()
 	
 	if controller.player_distance > lose_interest_range:
 		state_machine.change_state("WanderEnemyState")

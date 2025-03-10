@@ -17,7 +17,7 @@ var target_y_rot : float
 @onready var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var player = get_tree().get_nodes_in_group("player")[0]
 
-
+@onready var enemy_state: EnemyState
 
 var player_distance : float
 
@@ -81,7 +81,6 @@ func move_to_position(to_position: Vector3, adjust_pos: bool = true):
 
 func _on_health_component_body_entered(body: Node3D) -> void:
 	if body.is_in_group("thrown_object"):
-		health -= 25
-		print(health)
-		if health <=0:
-			print("fuck this")
+		run_speed=2
+		await get_tree().create_timer(0.5).timeout
+		run_speed=5

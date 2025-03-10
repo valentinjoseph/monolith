@@ -9,6 +9,16 @@ var _current_rotation:float
 @export var SPEED_DEFAULT = 5.0
 @export var JUMP_VELOCITY = 4.5
 
+#dash controls
+var dash_distance: float =5.0
+var dash_speed: float= 20.0
+var is_dashing: bool =false
+var start_position: Vector3
+var initial_rotation:Vector3
+var mouse_input_disabled: bool = false
+var collision_check_distance: float= 1.0
+@onready var collide_raycast: RayCast3D = $CameraController/Camera3D/CollideRaycast
+
 #weapons
 @export var weapon_controller: WeaponController
 	
@@ -75,12 +85,18 @@ func _ready():
 	Global.player=self
 	#get mouse input
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
+	initial_rotation=rotation
+	#collide_raycast.target_position = Vector3(0, 0, -collision_check_distance) 
+
 	#set default speed
 	_speed = SPEED_DEFAULT
 	
 	#add crouch check shapecast collision exception for CharacterBody3D node
 	crouch_shapecast.add_exception($".")
+
+func _input(event: InputEvent) -> void:
+	if is_dashing and event is InputEventMouseMotion:
+		get_viewport().set_input_as_handled()
 	
 func _physics_process(delta: float) -> void:
 	#Global.debug.add_property("MovementSpeed", _speed, 2)
@@ -102,9 +118,32 @@ func update_input(speed:float,acceleration:float,deceleration:float)->void:
 		velocity.z = move_toward(velocity.z, 0, deceleration)
 	Global.debug.add_property("MovementSpeed", speed, 2)
 	
+
+	
 func update_velocity() -> void:
 	move_and_slide()
-#
+
+func _process(delta)->void:	
+	if is_dashing==true:
+		rotation=initial_rotation
+		mouse_input_disabled = true
+		collide_raycast.force_raycast_update()
+		if collide_raycast.is_colliding():
+			print("dash collide")
+			is_dashing=false
+			mouse_input_disabled=false
+			return
+		var direction= -transform.basis.z.normalized()
+		position += direction * dash_speed * delta
+		if position.distance_to(start_position) >= dash_distance:
+			mouse_input_disabled = false
+			is_dashing=false
+	else:
+		if Input.is_action_just_pressed("teleport"):
+			start_position=position
+			initial_rotation=rotation
+			is_dashing=true
+
 #func interact_cast()->void:
 	#var camera = Global.player.camera_controller
 	#var space_state = camera.get_world_3d().direct_space_state

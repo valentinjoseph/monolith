@@ -38,7 +38,7 @@ func _process(delta):
 		current_state.update(delta)
 		
 func _kill():
-	get_tree().queue_free()
+	print("you dead")
 			
 func _physics_process(delta):
 	if current_state != null:

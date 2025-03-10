@@ -34,7 +34,7 @@ debug_path_custom_point_size = 8.37
 
 [node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("default_state")]
 script = ExtResource("2_0j5va")
-default_state = NodePath("WanderEnemyState")
+default_state = NodePath("ChaseEnemyState")
 
 [node name="IdleEnemyState" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("3_5hvgl")
