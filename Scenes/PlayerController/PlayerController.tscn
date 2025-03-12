@@ -535,28 +535,32 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 10.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
 script = ExtResource("2_ngm4u")
 reticle_lines = [NodePath("Top"), NodePath("Right"), NodePath("Bottom"), NodePath("Left")]
 player_controller = NodePath("../..")
+DOT_RADIUS = 2.0
 
 [node name="Top" type="Line2D" parent="UserInterface/Reticle"]
+visible = false
 points = PackedVector2Array(0, -5, 0, -15)
 width = 2.0
 
 [node name="Right" type="Line2D" parent="UserInterface/Reticle"]
+visible = false
 points = PackedVector2Array(5, 0, 15, 0)
 width = 2.0
 
 [node name="Bottom" type="Line2D" parent="UserInterface/Reticle"]
+visible = false
 points = PackedVector2Array(0, 5, 0, 15)
 width = 2.0
 
 [node name="Left" type="Line2D" parent="UserInterface/Reticle"]
+visible = false
 points = PackedVector2Array(-5, 0, -15, 0)
 width = 2.0
 
@@ -567,7 +571,6 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 210.0
 offset_bottom = 50.0
-scale = Vector2(2, 2)
 theme = ExtResource("3_lpptg")
 script = ExtResource("4_mevor")
 
